@@ -33,6 +33,17 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => ['requird', 'string'],
+            'email' => ['required', 'email', 'unique:users,email'],
+            'password' => ['required', 'min:6', 'string'],
+            'password_confirmation' => ['required'],
+            'national_id' => ['integer'],
+            'mobile_number' => ['integer'],
+            'gender' => ['required', 'string'],
+            'date_of_birth' => ['date']
+        ]);
+
         if ($request->input('password') === $request->input('password_confirmation')) {
             User::create([
                 'name' => $request->input('name'),
@@ -67,6 +78,16 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        $request->validate([
+            'name' => ['requird', 'string'],
+            'email' => ['required', 'email'],
+            'password' => ['min:6', 'string'],
+            'national_id' => ['integer'],
+            'mobile_number' => ['integer'],
+            'gender' => ['required', 'string'],
+            'date_of_birth' => ['date']
+        ]);
+
         $main_params = [
             'name' => $request->input('name'),
             'email' => $request->input('email'),

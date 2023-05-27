@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\PharmaciesExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PharmacyRequest;
 use App\Models\Governorate;
 use App\Models\Pharmacy;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PharmaciesController extends Controller
 {
@@ -95,5 +97,27 @@ class PharmaciesController extends Controller
     {
         $pharmacy->delete();
         return back();
+    }
+
+    /**
+     * Transport pharmacies database table to excel file.
+     */
+    public function export()
+    {
+        $pharmacies = array_map(function ($pharmacy) {
+            return [
+                $pharmacy->id,
+                $pharmacy->name,
+                $pharmacy->priority,
+                $pharmacy->user->name,
+                $pharmacy->governorate->name,
+                $pharmacy->created_at->diffForHumans(),
+                $pharmacy->updated_at->diffForHumans()
+            ];
+        }, [...Pharmacy::all()]);
+
+        $export = new PharmaciesExport([$pharmacies]);
+
+        return Excel::download($export, 'pharmacies.xlsx');
     }
 }

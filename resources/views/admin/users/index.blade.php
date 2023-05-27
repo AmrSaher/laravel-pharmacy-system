@@ -9,7 +9,8 @@
             <div class="col-sm-6">
                 <h1 class="m-0">Users</h1>
             </div><!-- /.col -->
-            <div class="col-sm-6" style="text-align: right">
+            <div class="col-sm-6 d-flex" style="gap: 10px; justify-content: flex-end;">
+                <a href="" class="btn btn-dark">Download excel file</a>
                 <a href="{{ route('admin.users.create') }}" class="btn btn-success">Create new user</a>
             </div><!-- /.col -->
         </div><!-- /.row -->

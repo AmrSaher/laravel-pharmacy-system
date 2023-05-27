@@ -20,7 +20,7 @@ return new class extends Migration
             $table->decimal('national_id', $precision = 14, $scale = 0)->nullable()->unique();
             $table->enum('gender', ['male', 'female'])->default('male');
             $table->date('date_of_birth')->nullable();
-            $table->string('profile_image')->nullable()->default(asset('dist/img/user2-160x160.jpg'));
+            $table->string('profile_image')->nullable()->default('https://th.bing.com/th/id/R.ccfd669479d5d5ba603835bc82f41215?rik=c0YhIEaO%2bbKLJQ&pid=ImgRaw&r=0');
             $table->string('mobile_number')->nullable();
             $table->rememberToken();
             $table->timestamps();

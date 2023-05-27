@@ -23,6 +23,6 @@ class AdminSeeder extends Seeder
             'name' => 'pharmacy',
             'email' => 'pharmacy@pharmacy.com',
             'password' => '123456'
-        ]);
+        ])->assignRole('pharmacy');
     }
 }
