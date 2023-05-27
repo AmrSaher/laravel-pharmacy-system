@@ -47,6 +47,15 @@ class PharmaciesController extends Controller
         $request->validate([
             'name' => ['unique:pharmacies,name']
         ]);
+        $user = User::find($request->input('owner'));
+
+        if (count($user->getRoleNames()) > 0) {
+            return back()->withErrors([
+                'owner' => 'This owner already has a role.'
+            ])->onlyInput('owner');
+        }
+
+        $user->assignRole('pharmacy');
 
         Pharmacy::create([
             'name' => $request->input('name'),
@@ -54,8 +63,6 @@ class PharmaciesController extends Controller
             'owner_id' => $request->input('owner'),
             'governorate_id' => $request->input('governorate')
         ]);
-
-        User::find($request->input('owner'))->assignRole('pharmacy');
 
         return redirect()->route('admin.pharmacies.index');
     }
