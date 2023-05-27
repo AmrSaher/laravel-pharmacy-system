@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LoignController extends Controller
 {
-    public function create(Request $request)
+    public function create()
     {
         return view('auth.login');
     }

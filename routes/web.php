@@ -4,6 +4,8 @@ use App\Http\Controllers\Admin\Auth\ForgetPasswordController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Auth\LoignController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PharmaciesController;
+use App\Http\Controllers\Admin\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,8 +26,15 @@ Route::get('forget-password', [ForgetPasswordController::class, 'create'])->midd
 
 // Admin
 Route::prefix('admin')->middleware(['role:admin|doctor|pharmacy'])->name('admin.')->group(function () {
+    // Dashboard
     Route::get('/', function () {
         return redirect()->route('admin.dashboard');
     })->middleware('auth');
-    Route::get('dashboard', DashboardController::class)->middleware(['auth', 'role:admin'])->name('dashboard');
+    Route::get('dashboard', DashboardController::class)->middleware('auth')->name('dashboard');
+
+    // Pharmacies
+    Route::resource('pharmacies', PharmaciesController::class)->middleware(['auth', 'role:admin']);
+
+    // Users
+    Route::resource('users', UsersController::class)->middleware(['auth', 'role:admin']);
 });

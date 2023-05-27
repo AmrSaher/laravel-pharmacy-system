@@ -13,7 +13,7 @@
                 <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
+                <a href="#" class="d-block">{{ Auth::user()->name }}</a>
             </div>
         </div>
 
@@ -42,7 +42,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link {{ Route::is('') ? 'active' : '' }}">
+                        <a href="{{ route('admin.pharmacies.index') }}" class="nav-link {{ Route::is('admin.pharmacies.index') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-clinic-medical"></i>
                             <p>
                                 Pharmacies
@@ -58,7 +58,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link {{ Route::is('') ? 'active' : '' }}">
+                        <a href="{{ route('admin.users.index') }}" class="nav-link {{ Route::is('admin.users.index') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-user"></i>
                             <p>
                                 Users
@@ -107,6 +107,14 @@
                     </li>
                 @endrole
                 @role('pharmacy')
+                    <li class="nav-item">
+                        <a href="{{ route('admin.dashboard') }}" class="nav-link {{ Route::is('admin.dashboard') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-chart-line"></i>
+                            <p>
+                                Dashboard
+                            </p>
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a href="" class="nav-link {{ Route::is('') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-user-md"></i>

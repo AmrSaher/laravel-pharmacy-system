@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class ForgetPasswordController extends Controller
 {
-    public function create(Request $request)
+    public function create()
     {
         return view('auth.forget-password');
     }

@@ -18,5 +18,11 @@ class AdminSeeder extends Seeder
             'email' => 'admin@admin.com',
             'password' => '123456'
         ])->assignRole('admin');
+
+        User::create([
+            'name' => 'pharmacy',
+            'email' => 'pharmacy@pharmacy.com',
+            'password' => '123456'
+        ]);
     }
 }
