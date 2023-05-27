@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\UsersExport;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UsersController extends Controller
 {
@@ -122,5 +124,28 @@ class UsersController extends Controller
     {
         $user->delete();
         return back();
+    }
+
+    /**
+     * Transport users database table to excel file.
+     */
+    public function export()
+    {
+        $users = array_map(function ($user) {
+            return [
+                $user->id,
+                $user->name,
+                $user->email,
+                $user->national_id,
+                $user->gender,
+                $user->date_of_birth,
+                $user->mobile_number,
+                $user->created_at->diffForHumans(),
+            ];
+        }, [...User::all()]);
+
+        $export = new UsersExport([$users]);
+
+        return Excel::download($export, 'users.xlsx');
     }
 }

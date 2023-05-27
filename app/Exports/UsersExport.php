@@ -5,18 +5,18 @@ namespace App\Exports;
 use Maatwebsite\Excel\Concerns\FromArray;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class PharmaciesExport implements FromArray, WithHeadings
+class UsersExport implements FromArray, WithHeadings
 {
-    protected $pharmacies;
+    protected $users;
 
-    public function __construct(array $pharmacies)
+    public function __construct(array $users)
     {
-        $this->pharmacies = $pharmacies;
+        $this->users = $users;
     }
 
     public function array() : array
     {
-        return $this->pharmacies;
+        return $this->users;
     }
 
     public function headings() : array
@@ -24,9 +24,11 @@ class PharmaciesExport implements FromArray, WithHeadings
         return [
             'ID',
             'Name',
-            'Priority',
-            'Owner',
-            'Governorate',
+            'Email',
+            'National ID',
+            'Gender',
+            'Date of birth',
+            'Mobile number',
             'Created at'
         ];
     }

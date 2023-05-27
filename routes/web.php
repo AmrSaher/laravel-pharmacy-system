@@ -38,4 +38,5 @@ Route::prefix('admin')->middleware(['role:admin|doctor|pharmacy'])->name('admin.
 
     // Users
     Route::resource('users', UsersController::class)->middleware(['auth', 'role:admin']);
+    Route::get('export/users', [UsersController::class, 'export'])->middleware(['auth', 'role:admin'])->name('users.export');
 });

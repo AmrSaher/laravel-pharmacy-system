@@ -111,8 +111,7 @@ class PharmaciesController extends Controller
                 $pharmacy->priority,
                 $pharmacy->user->name,
                 $pharmacy->governorate->name,
-                $pharmacy->created_at->diffForHumans(),
-                $pharmacy->updated_at->diffForHumans()
+                $pharmacy->created_at->diffForHumans()
             ];
         }, [...Pharmacy::all()]);
 
