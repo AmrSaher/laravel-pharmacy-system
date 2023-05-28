@@ -66,6 +66,14 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{ route('admin.governorates.index') }}" class="nav-link {{ Route::is('admin.governorates.index') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-globe-africa"></i>
+                            <p>
+                                Governorates
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="" class="nav-link {{ Route::is('') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-map"></i>
                             <p>
