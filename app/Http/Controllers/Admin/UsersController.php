@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Exports\UsersExport;
+use App\Exports\MainExport;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -140,11 +140,22 @@ class UsersController extends Controller
                 $user->gender,
                 $user->date_of_birth,
                 $user->mobile_number,
-                $user->created_at->diffForHumans(),
+                $user->created_at
             ];
         }, [...User::all()]);
 
-        $export = new UsersExport([$users]);
+        $headings = [
+            'ID',
+            'Name',
+            'Email',
+            'National ID',
+            'Gender',
+            'Date of birth',
+            'Mobile number',
+            'Created at'
+        ];
+
+        $export = new MainExport([$users], $headings);
 
         return Excel::download($export, 'users.xlsx');
     }

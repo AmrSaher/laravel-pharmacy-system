@@ -103,7 +103,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="national_id"
-                                    >Inational ID</label
+                                    >National ID</label
                                 >
                                 <input
                                     type="number"

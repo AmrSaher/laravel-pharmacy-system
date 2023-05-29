@@ -12,4 +12,9 @@ class Governorate extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function pharmacies()
+    {
+        return $this->hasMany(Pharmacy::class);
+    }
 }

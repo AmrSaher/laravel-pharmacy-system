@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Auth\ForgetPasswordController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Auth\LoignController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DoctorsController;
 use App\Http\Controllers\Admin\GovernoratesController;
 use App\Http\Controllers\Admin\PharmaciesController;
 use App\Http\Controllers\Admin\UsersController;
@@ -43,4 +44,8 @@ Route::prefix('admin')->middleware(['role:admin|doctor|pharmacy'])->name('admin.
 
     // Governorates
     Route::resource('governorates', GovernoratesController::class)->middleware(['auth', 'role:admin']);
+
+    // Doctors
+    Route::resource('doctors', DoctorsController::class)->middleware(['auth', 'role:admin|pharmacy']);
+    Route::get('export/doctors', [DoctorsController::class, 'export'])->middleware(['auth', 'role:admin|pharmacy'])->name('doctors.export');
 });

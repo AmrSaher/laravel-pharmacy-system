@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Exports\PharmaciesExport;
+use App\Exports\MainExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PharmacyRequest;
 use App\Models\Governorate;
@@ -47,9 +47,15 @@ class PharmaciesController extends Controller
         $request->validate([
             'name' => ['unique:pharmacies,name']
         ]);
-        $user = User::find($request->input('owner'));
 
-        if (count($user->getRoleNames()) > 0) {
+        $user = User::find($request->input('owner'));
+        $userRoleNames = array_values((array) $user->getRoleNames())[0];
+
+        if (
+            in_array('pharmacy', $userRoleNames) || 
+            in_array('doctor', $userRoleNames) || 
+            in_array('admin', $userRoleNames)
+        ) {
             return back()->withErrors([
                 'owner' => 'This owner already has a role.'
             ])->onlyInput('owner');
@@ -102,6 +108,17 @@ class PharmaciesController extends Controller
      */
     public function destroy(Pharmacy $pharmacy)
     {
+        $user = User::find($pharmacy->user->id);
+        $user->removeRole('pharmacy');
+        $user->assignRole('user');
+
+        $doctors = $pharmacy->doctors;
+        foreach ($doctors as $doctor) {
+            $doctorUser = User::find($doctor->user->id);
+            $doctorUser->removeRole('doctor');
+            $doctorUser->assignRole('user');
+        }
+
         $pharmacy->delete();
         return back();
     }
@@ -118,11 +135,20 @@ class PharmaciesController extends Controller
                 $pharmacy->priority,
                 $pharmacy->user->name,
                 $pharmacy->governorate->name,
-                $pharmacy->created_at->diffForHumans()
+                $pharmacy->created_at
             ];
         }, [...Pharmacy::all()]);
 
-        $export = new PharmaciesExport([$pharmacies]);
+        $headings = [
+            'ID',
+            'Name',
+            'Priority',
+            'Owner',
+            'Governorate',
+            'Created at'
+        ];
+
+        $export = new MainExport([$pharmacies], $headings);
 
         return Excel::download($export, 'pharmacies.xlsx');
     }

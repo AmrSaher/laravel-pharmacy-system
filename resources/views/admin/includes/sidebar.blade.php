@@ -50,7 +50,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link {{ Route::is('') ? 'active' : '' }}">
+                        <a href="{{ route('admin.doctors.index') }}" class="nav-link {{ Route::is('admin.doctors.index') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-user-md"></i>
                             <p>
                                 Doctors

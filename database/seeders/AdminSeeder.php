@@ -24,5 +24,17 @@ class AdminSeeder extends Seeder
             'email' => 'pharmacy@pharmacy.com',
             'password' => '123456'
         ]);
+
+        User::create([
+            'name' => 'doctor1',
+            'email' => 'doctor1@doctor.com',
+            'password' => '123456'
+        ]);
+
+        User::create([
+            'name' => 'doctor2',
+            'email' => 'doctor2@doctor.com',
+            'password' => '123456'
+        ]);
     }
 }
