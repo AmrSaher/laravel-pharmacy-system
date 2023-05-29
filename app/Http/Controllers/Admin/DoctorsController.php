@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\User;
 use App\Models\Doctor;
+use App\Models\Pharmacy;
 use App\Exports\MainExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Pharmacy;
-use App\Models\User;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Session;
 
 class DoctorsController extends Controller
 {
@@ -68,6 +69,11 @@ class DoctorsController extends Controller
             'pharmacy_id' => $request->input('pharmacy')
         ]);
 
+        Session::flash('message', [
+            'type' => 'success',
+            'message' => 'Doctor created successfully!'
+        ]);
+
         return redirect()->route('admin.doctors.index');
     }
 
@@ -122,6 +128,11 @@ class DoctorsController extends Controller
             'pharmacy_id' => $request->input('pharmacy')
         ]);
 
+        Session::flash('message', [
+            'type' => 'success',
+            'message' => 'Doctor (' . $doctor->user->name . ') updated successfully!'
+        ]);
+
         return redirect()->route('admin.doctors.index');
     }
 
@@ -133,6 +144,11 @@ class DoctorsController extends Controller
         $user = User::find($doctor->user->id);
         $user->removeRole('doctor');
         $user->assignRole('user');
+
+        Session::flash('message', [
+            'type' => 'success',
+            'message' => 'Doctor (' . $user->name . ') deleted successfully!'
+        ]);
 
         $doctor->delete();
         return back();

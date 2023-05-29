@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Governorate;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 class GovernoratesController extends Controller
 {
@@ -41,6 +42,11 @@ class GovernoratesController extends Controller
             'name' => $request->input('name')
         ]);
 
+        Session::flash('message', [
+            'type' => 'success',
+            'message' => 'Governorate created successfully!'
+        ]);
+
         return redirect()->route('admin.governorates.index');
     }
 
@@ -67,6 +73,11 @@ class GovernoratesController extends Controller
             'name' => $request->input('name')
         ]);
 
+        Session::flash('message', [
+            'type' => 'success',
+            'message' => 'Governorate (' . $governorate->name . ') updated successfully!'
+        ]);
+
         return redirect()->route('admin.governorates.index');
     }
 
@@ -75,6 +86,11 @@ class GovernoratesController extends Controller
      */
     public function destroy(Governorate $governorate)
     {
+        Session::flash('message', [
+            'type' => 'success',
+            'message' => 'Governorate (' . $governorate->name . ') deleted successfully!'
+        ]);
+
         $governorate->delete();
         return back();
     }

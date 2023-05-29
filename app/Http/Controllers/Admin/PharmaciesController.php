@@ -9,6 +9,7 @@ use App\Models\Governorate;
 use App\Models\Pharmacy;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
 
 class PharmaciesController extends Controller
@@ -70,6 +71,11 @@ class PharmaciesController extends Controller
             'governorate_id' => $request->input('governorate')
         ]);
 
+        Session::flash('message', [
+            'type' => 'success',
+            'message' => 'Pharmacy created successfuly!'
+        ]);
+
         return redirect()->route('admin.pharmacies.index');
     }
 
@@ -100,6 +106,11 @@ class PharmaciesController extends Controller
             'governorate_id' => $request->input('governorate')
         ]);
 
+        Session::flash('message', [
+            'type' => 'success',
+            'message' => 'Pharmacy (' . $pharmacy->name . ') updated successfully!'
+        ]);
+
         return redirect()->route('admin.pharmacies.index');
     }
 
@@ -118,6 +129,11 @@ class PharmaciesController extends Controller
             $doctorUser->removeRole('doctor');
             $doctorUser->assignRole('user');
         }
+
+        Session::flash('message', [
+            'type' => 'success',
+            'message' => 'Pharmacy (' . $pharmacy->name . ') deleted successfully!'
+        ]);
 
         $pharmacy->delete();
         return back();

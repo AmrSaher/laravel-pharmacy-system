@@ -78,33 +78,6 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="password"
-                                    >Password</label
-                                >
-                                <input
-                                    type="password"
-                                    name="password"
-                                    class="form-control"
-                                    id="password"
-                                    placeholder="Enter user password"
-                                />
-                                @error('password')
-                                    <span class="text-danger w-100">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="cpassword"
-                                    >Confirm Password</label
-                                >
-                                <input
-                                    type="password"
-                                    name="password_confirmation"
-                                    class="form-control"
-                                    id="cpassword"
-                                    placeholder="Confirm user password"
-                                />
-                            </div>
-                            <div class="form-group">
                                 <label for="national_id"
                                     >National ID</label
                                 >

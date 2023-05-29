@@ -6,6 +6,7 @@ use App\Exports\MainExport;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
 
 class UsersController extends Controller
@@ -36,12 +37,12 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['requird', 'string'],
+            'name' => ['required', 'string'],
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'min:6', 'string'],
             'password_confirmation' => ['required'],
             'national_id' => ['integer'],
-            'mobile_number' => ['integer'],
+            'mobile_number' => ['string'],
             'gender' => ['required', 'string'],
             'date_of_birth' => ['date']
         ]);
@@ -55,6 +56,11 @@ class UsersController extends Controller
                 'gender' => $request->input('gender'),
                 'date_of_birth' => $request->input('date_of_birth'),
                 'mobile_number' => $request->input('mobile_number')
+            ]);
+
+            Session::flash('message', [
+                'type' => 'success',
+                'message' => 'User created successfuly!'
             ]);
 
             return redirect()->route('admin.users.index');
@@ -81,38 +87,27 @@ class UsersController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'name' => ['requird', 'string'],
+            'name' => ['required', 'string'],
             'email' => ['required', 'email'],
-            'password' => ['min:6', 'string'],
-            'national_id' => ['integer'],
-            'mobile_number' => ['integer'],
+            // 'national_id' => ['integer'],
+            // 'mobile_number' => ['integer'],
             'gender' => ['required', 'string'],
             'date_of_birth' => ['date']
         ]);
 
-        $main_params = [
+        $user->update([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'national_id' => $request->input('national_id'),
             'gender' => $request->input('gender'),
             'mobile_number' => $request->input('mobile_number'),
             'date_of_birth' => $request->input('date_of_birth')
-        ];
+        ]);
 
-        if (is_null($request->input('password'))) {
-            $user->update($main_params);
-        } else {
-            if ($request->input('password') === $request->input('password_confirmation')) {
-                $user->update([
-                    ...$main_params,
-                    'password' => $request->input('password')
-                ]);
-            } else {
-                return back()->withErrors([
-                    'password' => 'yyyyy'
-                ])->onlyInput('password');
-            }
-        }
+        Session::flash('message', [
+            'type' => 'success',
+            'message' => 'User (' . $user->name . ') updated successfuly!'
+        ]);
 
         return redirect()->route('admin.users.index');
     }
@@ -122,6 +117,11 @@ class UsersController extends Controller
      */
     public function destroy(User $user)
     {
+        Session::flash('message', [
+            'type' => 'success',
+            'message' => 'User (' . $user->name . ') deleted successfuly!'
+        ]);
+
         $user->delete();
         return back();
     }
