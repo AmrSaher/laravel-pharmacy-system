@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Cog\Contracts\Ban\Bannable as BannableInterface;
+use Cog\Laravel\Ban\Traits\Bannable;
 
-class Doctor extends Model
+class Doctor extends Model implements BannableInterface
 {
-    use HasFactory;
+    use HasFactory, Bannable;
 
     protected $fillable = [
         'user_id',

@@ -27,6 +27,7 @@ return new class extends Migration
                 ->on('pharmacies')
                 ->onDelete('cascade');
 
+            $table->timestamp('banned_at')->nullable();
             $table->timestamps();
         });
     }

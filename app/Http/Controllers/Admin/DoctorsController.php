@@ -139,6 +139,20 @@ class DoctorsController extends Controller
     }
 
     /**
+     * Ban and unban doctors with laravel ban.
+     */
+    public function ban(Doctor $doctor)
+    {
+        if ($doctor->isBanned()) {
+            $doctor->unban();    
+        } else {
+            $doctor->ban();
+        }
+
+        return back();
+    }
+
+    /**
      * Transport doctors database table to excel file.
      */
     public function export()

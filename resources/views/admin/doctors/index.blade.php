@@ -59,6 +59,13 @@
                             <a href="#" class="btn btn-danger" onclick="if (confirm('Are you sure ?')) document.getElementById('delete-doctor-form-{{ $doctor->id }}').submit()">
                                 <i class="fas fa-trash-alt"></i>
                             </a>
+                            <form method="POST" action="{{ route('admin.doctors.ban', ['doctor' => $doctor->id]) }}" id="ban-doctor-form-{{ $doctor->id }}" style="display: none;">
+                                @csrf
+                                @method('put')
+                            </form>
+                            <a href="#" class="btn btn-danger" onclick="document.getElementById('ban-doctor-form-{{ $doctor->id }}').submit()">
+                                {{ $doctor->isBanned() ? 'Unban' : 'Ban' }}
+                            </a>
                         </td>
                     </tr>
                 @endforeach

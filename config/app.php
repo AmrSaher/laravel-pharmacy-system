@@ -170,6 +170,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Cog\Laravel\Ban\Providers\BanServiceProvider::class,
     ])->toArray(),
 
     /*
