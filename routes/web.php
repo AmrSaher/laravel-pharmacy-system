@@ -50,3 +50,7 @@ Route::prefix('admin')->middleware(['role:admin|doctor|pharmacy'])->name('admin.
     Route::get('export/doctors', [DoctorsController::class, 'export'])->middleware(['auth', 'role:admin|pharmacy'])->name('doctors.export');
     Route::put('doctors/ban/{doctor}', [DoctorsController::class, 'ban'])->middleware(['auth', 'role:admin|pharmacy'])->name('doctors.ban');
 });
+
+Route::get('test', function () {
+    return view('errors.500');
+});

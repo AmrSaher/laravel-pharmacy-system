@@ -8,10 +8,10 @@
         <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
         <script>
             let notyf = new Notyf()
-            
+
             notyf.open({
-                type: '{{ Session::get("message")["type"] }}',
-                message: '{{ Session::get("message")["message"] }}',
+                type: '{{ Session::get('message')['type'] }}',
+                message: '{{ Session::get('message')['message'] }}',
                 duration: 3000
             })
         </script>
@@ -54,7 +54,8 @@
                         <tr>
                             <td>{{ $doctor->id }}</td>
                             <td>
-                                <img src="{{ $doctor->user->profile_image }}" alt="user image" style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;">
+                                <img src="{{ $doctor->user->profile_image }}" alt="user image"
+                                    style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;">
                             </td>
                             <td>{{ $doctor->user->name }}</td>
                             <td>{{ $doctor->user->email }}</td>
@@ -63,21 +64,27 @@
                             <td>{{ $doctor->status }}</td>
                             <td>{{ $doctor->created_at->diffForHumans() }}</td>
                             <td>
-                                <a href="{{ route('admin.doctors.edit', ['doctor' => $doctor->id]) }}" class="btn btn-primary">
+                                <a href="{{ route('admin.doctors.edit', ['doctor' => $doctor->id]) }}"
+                                    class="btn btn-primary">
                                     <i class="fas fa-pen"></i>
                                 </a>
-                                <form method="POST" action="{{ route('admin.doctors.destroy', ['doctor' => $doctor->id]) }}" id="delete-doctor-form-{{ $doctor->id }}" style="display: none;">
+                                <form method="POST"
+                                    action="{{ route('admin.doctors.destroy', ['doctor' => $doctor->id]) }}"
+                                    id="delete-doctor-form-{{ $doctor->id }}" style="display: none;">
                                     @csrf
                                     @method('delete')
                                 </form>
-                                <a href="#" class="btn btn-danger" onclick="if (confirm('Are you sure ?')) document.getElementById('delete-doctor-form-{{ $doctor->id }}').submit()">
+                                <a href="#" class="btn btn-danger"
+                                    onclick="if (confirm('Are you sure ?')) document.getElementById('delete-doctor-form-{{ $doctor->id }}').submit()">
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
-                                <form method="POST" action="{{ route('admin.doctors.ban', ['doctor' => $doctor->id]) }}" id="ban-doctor-form-{{ $doctor->id }}" style="display: none;">
+                                <form method="POST" action="{{ route('admin.doctors.ban', ['doctor' => $doctor->id]) }}"
+                                    id="ban-doctor-form-{{ $doctor->id }}" style="display: none;">
                                     @csrf
                                     @method('put')
                                 </form>
-                                <a href="#" class="btn btn-danger" onclick="document.getElementById('ban-doctor-form-{{ $doctor->id }}').submit()">
+                                <a href="#" class="btn btn-danger"
+                                    onclick="document.getElementById('ban-doctor-form-{{ $doctor->id }}').submit()">
                                     {{ $doctor->isBanned() ? 'Unban' : 'Ban' }}
                                 </a>
                             </td>

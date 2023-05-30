@@ -8,10 +8,10 @@
         <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
         <script>
             let notyf = new Notyf()
-            
+
             notyf.open({
-                type: '{{ Session::get("message")["type"] }}',
-                message: '{{ Session::get("message")["message"] }}',
+                type: '{{ Session::get('message')['type'] }}',
+                message: '{{ Session::get('message')['message'] }}',
                 duration: 3000
             })
         </script>
@@ -48,14 +48,18 @@
                             <td>{{ $governorate->id }}</td>
                             <td>{{ $governorate->name }}</td>
                             <td>
-                                <a href="{{ route('admin.governorates.edit', ['governorate' => $governorate->id]) }}" class="btn btn-primary">
+                                <a href="{{ route('admin.governorates.edit', ['governorate' => $governorate->id]) }}"
+                                    class="btn btn-primary">
                                     <i class="fas fa-pen"></i>
                                 </a>
-                                <form method="POST" action="{{ route('admin.governorates.destroy', ['governorate' => $governorate->id]) }}" id="delete-governorate-form-{{ $governorate->id }}" style="display: none;">
+                                <form method="POST"
+                                    action="{{ route('admin.governorates.destroy', ['governorate' => $governorate->id]) }}"
+                                    id="delete-governorate-form-{{ $governorate->id }}" style="display: none;">
                                     @csrf
                                     @method('delete')
                                 </form>
-                                <a href="#" class="btn btn-danger" onclick="if (confirm('Are you sure ?')) document.getElementById('delete-governorate-form-{{ $governorate->id }}').submit()">
+                                <a href="#" class="btn btn-danger"
+                                    onclick="if (confirm('Are you sure ?')) document.getElementById('delete-governorate-form-{{ $governorate->id }}').submit()">
                                     <i class="fas fa-trash-alt"></i>
                                 </a>
                             </td>
