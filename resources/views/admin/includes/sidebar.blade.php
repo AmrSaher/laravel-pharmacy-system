@@ -84,6 +84,14 @@
                     </li>
                     <li class="nav-item">
                         <a href="" class="nav-link {{ Route::is('') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-pills"></i>
+                            <p>
+                                Medicines
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link {{ Route::is('') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-map"></i>
                             <p>
                                 Areas
@@ -95,14 +103,6 @@
                             <i class="nav-icon fas fa-map-marker"></i>
                             <p>
                                 User Addresses
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link {{ Route::is('') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-pills"></i>
-                            <p>
-                                Medicines
                             </p>
                         </a>
                     </li>
@@ -134,7 +134,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link {{ Route::is('') ? 'active' : '' }}">
+                        <a href="{{ route('admin.doctors.index') }}" class="nav-link {{ Route::is('admin.doctors.index') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-user-md"></i>
                             <p>
                                 Doctors

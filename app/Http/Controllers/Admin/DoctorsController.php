@@ -8,6 +8,7 @@ use App\Models\Pharmacy;
 use App\Exports\MainExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Session;
 

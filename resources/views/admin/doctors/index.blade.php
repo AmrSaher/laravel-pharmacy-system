@@ -43,7 +43,9 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>National ID</th>
-                        <th>Pharmacy</th>
+                        @role('admin')
+                            <th>Pharmacy</th>
+                        @endrole
                         <th>Status</th>
                         <th>Created at</th>
                         <th>Actions</th>
@@ -60,7 +62,9 @@
                             <td>{{ $doctor->user->name }}</td>
                             <td>{{ $doctor->user->email }}</td>
                             <td>{{ $doctor->user->national_id }}</td>
-                            <td>{{ $doctor->pharmacy->name }}</td>
+                            @role('admin')
+                                <td>{{ $doctor->pharmacy->name }}</td>
+                            @endrole
                             <td>{{ $doctor->status }}</td>
                             <td>{{ $doctor->created_at->diffForHumans() }}</td>
                             <td>
