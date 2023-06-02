@@ -35,7 +35,7 @@
     <!-- Main content -->
     <div class="content">
         <div class="container-fluid">
-            <table id="pharmacies-table" class="display">
+            <table id="doctors-table" class="display">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -67,7 +67,7 @@
                             @endrole
                             <td>{{ $doctor->status }}</td>
                             <td>{{ $doctor->created_at->diffForHumans() }}</td>
-                            <td>
+                            <td style="display: flex; flex-wrap: wrap; gap: 10px;">
                                 <a href="{{ route('admin.doctors.edit', ['doctor' => $doctor->id]) }}"
                                     class="btn btn-primary">
                                     <i class="fas fa-pen"></i>
@@ -88,7 +88,7 @@
                                     @method('put')
                                 </form>
                                 <a href="#" class="btn btn-danger"
-                                    onclick="document.getElementById('ban-doctor-form-{{ $doctor->id }}').submit()">
+                                    onclick="if (confirm('Are you sure ?')) document.getElementById('ban-doctor-form-{{ $doctor->id }}').submit()">
                                     {{ $doctor->isBanned() ? 'Unban' : 'Ban' }}
                                 </a>
                             </td>
@@ -107,6 +107,6 @@
 @section('extra-js')
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
     <script>
-        let table = new DataTable('#pharmacies-table', {})
+        let table = new DataTable('#doctors-table', {})
     </script>
 @endsection

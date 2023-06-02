@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Auth\ForgetPasswordController;
+use App\Http\Controllers\Admin\MedicinesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Auth\LoignController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -44,13 +45,14 @@ Route::prefix('admin')->middleware(['role:admin|doctor|pharmacy'])->name('admin.
 
     // Governorates
     Route::resource('governorates', GovernoratesController::class)->middleware(['auth', 'role:admin']);
+    Route::get('export/governorates', [GovernoratesController::class, 'export'])->middleware(['auth', 'role:admin'])->name('governorates.export');
 
     // Doctors
     Route::resource('doctors', DoctorsController::class)->middleware(['auth', 'role:admin|pharmacy']);
     Route::get('export/doctors', [DoctorsController::class, 'export'])->middleware(['auth', 'role:admin|pharmacy'])->name('doctors.export');
     Route::put('doctors/ban/{doctor}', [DoctorsController::class, 'ban'])->middleware(['auth', 'role:admin|pharmacy'])->name('doctors.ban');
-});
 
-Route::get('test', function () {
-    return view('errors.500');
+    // Medicines
+    Route::resource('medicines', MedicinesController::class)->middleware(['auth', 'role:admin|pharmacy|doctor']);
+    Route::get('export/medicines', [MedicinesController::class, 'export'])->middleware(['auth', 'role:admin|pharmacy|doctor'])->name('medicines.export');
 });

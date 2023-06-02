@@ -54,7 +54,7 @@
                             <td>{{ $pharmacy->governorate->name }}</td>
                             <td>{{ $pharmacy->priority }}</td>
                             <td>{{ $pharmacy->user->name }}</td>
-                            <td>
+                            <td style="display: flex; flex-wrap: wrap; gap: 10px;">
                                 <a href="{{ route('admin.pharmacies.edit', ['pharmacy' => $pharmacy->id]) }}"
                                     class="btn btn-primary">
                                     <i class="fas fa-pen"></i>

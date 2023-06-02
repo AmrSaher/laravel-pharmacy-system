@@ -36,16 +36,16 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
-                @role('admin')
-                    <li class="nav-item">
-                        <a href="{{ route('admin.dashboard') }}"
-                            class="nav-link {{ Route::is('admin.dashboard') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-chart-line"></i>
-                            <p>
-                                Dashboard
-                            </p>
-                        </a>
-                    </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.dashboard') }}"
+                        class="nav-link {{ Route::is('admin.dashboard') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-chart-line"></i>
+                        <p>
+                            Dashboard
+                        </p>
+                    </a>
+                </li>
+                @can('pharmacy_access')
                     <li class="nav-item">
                         <a href="{{ route('admin.pharmacies.index') }}"
                             class="nav-link {{ Route::is('admin.pharmacies.index') ? 'active' : '' }}">
@@ -55,6 +55,8 @@
                             </p>
                         </a>
                     </li>
+                @endcan
+                @can('doctor_access')
                     <li class="nav-item">
                         <a href="{{ route('admin.doctors.index') }}"
                             class="nav-link {{ Route::is('admin.doctors.index') ? 'active' : '' }}">
@@ -64,6 +66,8 @@
                             </p>
                         </a>
                     </li>
+                @endcan
+                @can('user_access')
                     <li class="nav-item">
                         <a href="{{ route('admin.users.index') }}"
                             class="nav-link {{ Route::is('admin.users.index') ? 'active' : '' }}">
@@ -73,6 +77,8 @@
                             </p>
                         </a>
                     </li>
+                @endcan
+                @can('governorate_access')
                     <li class="nav-item">
                         <a href="{{ route('admin.governorates.index') }}"
                             class="nav-link {{ Route::is('admin.governorates.index') ? 'active' : '' }}">
@@ -82,22 +88,18 @@
                             </p>
                         </a>
                     </li>
+                @endcan
+                @can('medicine_access')
                     <li class="nav-item">
-                        <a href="" class="nav-link {{ Route::is('') ? 'active' : '' }}">
+                        <a href="{{ route('admin.medicines.index') }}" class="nav-link {{ Route::is('admin.medicines.index') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-pills"></i>
                             <p>
                                 Medicines
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link {{ Route::is('') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-map"></i>
-                            <p>
-                                Areas
-                            </p>
-                        </a>
-                    </li>
+                @endcan
+                @can('user_address_access')
                     <li class="nav-item">
                         <a href="" class="nav-link {{ Route::is('') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-map-marker"></i>
@@ -106,6 +108,8 @@
                             </p>
                         </a>
                     </li>
+                @endcan
+                @can('order_access')
                     <li class="nav-item">
                         <a href="" class="nav-link {{ Route::is('') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-shopping-bag"></i>
@@ -114,60 +118,15 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link {{ Route::is('') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-wallet"></i>
-                            <p>
-                                Revenue
-                            </p>
-                        </a>
-                    </li>
-                @endrole
-                @role('pharmacy')
-                    <li class="nav-item">
-                        <a href="{{ route('admin.dashboard') }}"
-                            class="nav-link {{ Route::is('admin.dashboard') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-chart-line"></i>
-                            <p>
-                                Dashboard
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('admin.doctors.index') }}" class="nav-link {{ Route::is('admin.doctors.index') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-user-md"></i>
-                            <p>
-                                Doctors
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link {{ Route::is('') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-shopping-bag"></i>
-                            <p>
-                                Orders
-                            </p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="" class="nav-link {{ Route::is('') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-wallet"></i>
-                            <p>
-                                Revenue
-                            </p>
-                        </a>
-                    </li>
-                @endrole
-                @role('doctor')
-                    <li class="nav-item">
-                        <a href="" class="nav-link {{ Route::is('') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-shopping-bag"></i>
-                            <p>
-                                Orders
-                            </p>
-                        </a>
-                    </li>
-                @endrole
+                @endcan
+                <li class="nav-item">
+                    <a href="" class="nav-link {{ Route::is('') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-wallet"></i>
+                        <p>
+                            Revenue
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-header">AUTH</li>
                 <li class="nav-item">
                     <form action="{{ route('logout') }}" method="post" style="display: none;" id="logout-form">@csrf

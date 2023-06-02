@@ -23,7 +23,8 @@
                 <div class="col-sm-6">
                     <h1 class="m-0">Governorates</h1>
                 </div><!-- /.col -->
-                <div class="col-sm-6" style="text-align: right;">
+                <div class="col-sm-6 d-flex" style="gap: 10px; justify-content: flex-end;">
+                    <a href="/admin/export/governorates" class="btn btn-dark">Download excel file</a>
                     <a href="{{ route('admin.governorates.create') }}" class="btn btn-success">Create new governorate</a>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -34,7 +35,7 @@
     <!-- Main content -->
     <div class="content">
         <div class="container-fluid">
-            <table id="pharmacies-table" class="display">
+            <table id="governorates-table" class="display">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -47,7 +48,7 @@
                         <tr>
                             <td>{{ $governorate->id }}</td>
                             <td>{{ $governorate->name }}</td>
-                            <td>
+                            <td style="display: flex; flex-wrap: wrap; gap: 10px;">
                                 <a href="{{ route('admin.governorates.edit', ['governorate' => $governorate->id]) }}"
                                     class="btn btn-primary">
                                     <i class="fas fa-pen"></i>
@@ -78,6 +79,6 @@
 @section('extra-js')
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
     <script>
-        let table = new DataTable('#pharmacies-table', {})
+        let table = new DataTable('#governorates-table', {})
     </script>
 @endsection

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\MainExport;
 use App\Models\Governorate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
+use Maatwebsite\Excel\Facades\Excel;
 
 class GovernoratesController extends Controller
 {
@@ -93,5 +95,29 @@ class GovernoratesController extends Controller
 
         $governorate->delete();
         return back();
+    }
+
+    /**
+     * Transport doctors database table to excel file.
+     */
+    public function export()
+    {
+        $governorates = array_map(function ($governorate) {
+            return [
+                $governorate->id,
+                $governorate->name,
+                $governorate->created_at
+            ];
+        }, [...Governorate::all()]);
+
+        $headings = [
+            'ID',
+            'Name',
+            'Created at'
+        ];
+
+        $export = new MainExport([$governorates], $headings);
+
+        return Excel::download($export, 'governorates.xlsx');
     }
 }

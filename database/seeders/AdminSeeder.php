@@ -26,6 +26,12 @@ class AdminSeeder extends Seeder
         ]);
 
         User::create([
+            'name' => 'pharmacy2',
+            'email' => 'pharmacy2@pharmacy.com',
+            'password' => '123456'
+        ]);
+
+        User::create([
             'name' => 'doctor1',
             'email' => 'doctor1@doctor.com',
             'password' => '123456'

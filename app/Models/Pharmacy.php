@@ -12,13 +12,13 @@ class Pharmacy extends Model
     protected $fillable = [
         'name',
         'priority',
-        'owner_id',
+        'user_id',
         'governorate_id'
     ];
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'owner_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function governorate()

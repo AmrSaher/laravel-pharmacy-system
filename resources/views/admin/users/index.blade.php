@@ -35,7 +35,7 @@
     <!-- Main content -->
     <div class="content">
         <div class="container-fluid">
-            <table id="pharmacies-table" class="display">
+            <table id="users-table" class="display">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -94,6 +94,6 @@
 @section('extra-js')
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
     <script>
-        let table = new DataTable('#pharmacies-table', {})
+        let table = new DataTable('#users-table', {})
     </script>
 @endsection

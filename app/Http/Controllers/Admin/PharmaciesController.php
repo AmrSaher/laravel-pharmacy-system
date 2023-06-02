@@ -67,7 +67,7 @@ class PharmaciesController extends Controller
         Pharmacy::create([
             'name' => $request->input('name'),
             'priority' => $request->input('priority'),
-            'owner_id' => $request->input('owner'),
+            'user_id' => $request->input('owner'),
             'governorate_id' => $request->input('governorate')
         ]);
 
@@ -102,7 +102,7 @@ class PharmaciesController extends Controller
         $pharmacy->update([
             'name' => $request->input('name'),
             'priority' => $request->input('priority'),
-            'owner_id' => $request->input('owner'),
+            'user_id' => $request->input('owner'),
             'governorate_id' => $request->input('governorate')
         ]);
 

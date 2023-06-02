@@ -19,7 +19,10 @@ class DoctorsController extends Controller
      */
     public function index()
     {
-        $doctors = Doctor::all();
+        $user = Auth::user();
+        $doctors = $user->hasRole('admin') ?
+                    Doctor::all() :
+                    $user->pharmacy->doctors;
 
         return view('admin.doctors.index', [
             'doctors' => $doctors
@@ -54,8 +57,8 @@ class DoctorsController extends Controller
         $userRoleNames = array_values((array) $user->getRoleNames())[0];
 
         if (
-            in_array('pharmacy', $userRoleNames) || 
-            in_array('doctor', $userRoleNames) || 
+            in_array('pharmacy', $userRoleNames) ||
+            in_array('doctor', $userRoleNames) ||
             in_array('admin', $userRoleNames)
         ) {
             return back()->withErrors([
@@ -112,8 +115,8 @@ class DoctorsController extends Controller
             $userRoleNames = array_values((array) $newUser->getRoleNames())[0];
 
             if (
-                in_array('pharmacy', $userRoleNames) || 
-                in_array('doctor', $userRoleNames) || 
+                in_array('pharmacy', $userRoleNames) ||
+                in_array('doctor', $userRoleNames) ||
                 in_array('admin', $userRoleNames)
             ) {
                 return back()->withErrors([
@@ -161,10 +164,17 @@ class DoctorsController extends Controller
     public function ban(Doctor $doctor)
     {
         if ($doctor->isBanned()) {
-            $doctor->unban();    
+            $doctor->unban();
         } else {
             $doctor->ban();
         }
+
+        Session::flash('message', [
+            'type' => 'success',
+            'message' => 'Doctor (' . $doctor->user->name . ') ' .
+                ($doctor->isBanned() ? 'unbanned' : 'banned') .
+                ' successfully!'
+        ]);
 
         return back();
     }
