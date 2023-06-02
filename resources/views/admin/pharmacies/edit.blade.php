@@ -61,8 +61,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="owner">Owner</label>
-                                    <select name="owner" id="owner" class="form-control"
-                                        value="{{ $pharmacy->owner_id }}">
+                                    <select name="owner" id="owner" class="form-control">
                                         @foreach ($users as $user)
                                             <option {{ $user->id == $pharmacy->owner_id ? 'selected' : '' }}
                                                 value="{{ $user->id }}">{{ $user->name }} -> {{ $user->email }}

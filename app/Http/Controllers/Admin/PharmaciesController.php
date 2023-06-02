@@ -19,7 +19,7 @@ class PharmaciesController extends Controller
      */
     public function index()
     {
-        $pharmacies = Pharmacy::with('user')->get();
+        $pharmacies = Pharmacy::all();
 
         return view('admin.pharmacies.index', [
             'pharmacies' => $pharmacies
@@ -53,8 +53,8 @@ class PharmaciesController extends Controller
         $userRoleNames = array_values((array) $user->getRoleNames())[0];
 
         if (
-            in_array('pharmacy', $userRoleNames) || 
-            in_array('doctor', $userRoleNames) || 
+            in_array('pharmacy', $userRoleNames) ||
+            in_array('doctor', $userRoleNames) ||
             in_array('admin', $userRoleNames)
         ) {
             return back()->withErrors([
