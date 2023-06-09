@@ -30,7 +30,6 @@
                     <div class="small-box bg-info">
                         <div class="inner">
                             <h3>{{ $pharmaciesCount }}</h3>
-
                             <p>Pharmacies</p>
                         </div>
                         <div class="icon">
@@ -45,7 +44,6 @@
                     <div class="small-box bg-success">
                         <div class="inner">
                             <h3>{{ $doctorsCount }}</h3>
-
                             <p>Doctors</p>
                         </div>
                         <div class="icon">
@@ -60,7 +58,6 @@
                     <div class="small-box bg-warning">
                         <div class="inner">
                             <h3>{{ $usersCount }}</h3>
-
                             <p>Users</p>
                         </div>
                         <div class="icon">
@@ -75,7 +72,6 @@
                     <div class="small-box bg-danger">
                         <div class="inner">
                             <h3>{{ $ordersCount }}</h3>
-
                             <p>Order</p>
                         </div>
                         <div class="icon">

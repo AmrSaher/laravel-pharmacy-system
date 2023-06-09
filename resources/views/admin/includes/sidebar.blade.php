@@ -45,6 +45,28 @@
                         </p>
                     </a>
                 </li>
+                @can('role_access')
+                    <li class="nav-item">
+                        <a href="{{ route('admin.roles.index') }}"
+                           class="nav-link {{ Route::is('admin.roles.index') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-briefcase"></i>
+                            <p>
+                                Roles
+                            </p>
+                        </a>
+                    </li>
+                @endcan
+                @can('permission_access')
+                    <li class="nav-item">
+                        <a href="{{ route('admin.permissions.index') }}"
+                           class="nav-link {{ Route::is('admin.permissions.index') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-id-card-alt"></i>
+                            <p>
+                                Permissions
+                            </p>
+                        </a>
+                    </li>
+                @endcan
                 @can('pharmacy_access')
                     <li class="nav-item">
                         <a href="{{ route('admin.pharmacies.index') }}"

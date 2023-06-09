@@ -121,13 +121,11 @@ class PharmaciesController extends Controller
     {
         $user = User::find($pharmacy->user->id);
         $user->removeRole('pharmacy');
-        $user->assignRole('user');
 
         $doctors = $pharmacy->doctors;
         foreach ($doctors as $doctor) {
             $doctorUser = User::find($doctor->user->id);
             $doctorUser->removeRole('doctor');
-            $doctorUser->assignRole('user');
         }
 
         Session::flash('message', [

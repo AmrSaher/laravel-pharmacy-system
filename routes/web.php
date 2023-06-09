@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\Auth\ForgetPasswordController;
 use App\Http\Controllers\Admin\MedicinesController;
+use App\Http\Controllers\Admin\PermissionsController;
+use App\Http\Controllers\Admin\RolesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Auth\LoignController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -34,6 +36,14 @@ Route::prefix('admin')->middleware(['role:admin|doctor|pharmacy'])->name('admin.
         return redirect()->route('admin.dashboard');
     })->middleware('auth');
     Route::get('dashboard', DashboardController::class)->middleware('auth')->name('dashboard');
+
+    // Roles
+    Route::resource('roles', RolesController::class)->middleware(['auth', 'role:admin']);
+    Route::get('export/roles', [RolesController::class, 'export'])->middleware(['auth', 'role:admin'])->name('roles.export');
+
+    // Permissions
+    Route::resource('permissions', PermissionsController::class)->middleware(['auth', 'role:admin']);
+    Route::get('export/permissions', [PermissionsController::class, 'export'])->middleware(['auth', 'role:admin'])->name('permissions.export');
 
     // Pharmacies
     Route::resource('pharmacies', PharmaciesController::class)->middleware(['auth', 'role:admin']);
