@@ -123,7 +123,7 @@
                 @endcan
                 @can('user_address_access')
                     <li class="nav-item">
-                        <a href="" class="nav-link {{ Route::is('') ? 'active' : '' }}">
+                        <a href="{{ route('admin.user_addresses.index') }}" class="nav-link {{ Route::is('admin.user_addresses.index') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-map-marker"></i>
                             <p>
                                 User Addresses
