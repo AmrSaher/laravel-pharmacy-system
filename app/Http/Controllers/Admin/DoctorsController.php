@@ -35,11 +35,9 @@ class DoctorsController extends Controller
     public function create()
     {
         $pharmacies = Pharmacy::all();
-        $users = User::all();
 
         return view('admin.doctors.create', [
-            'pharmacies' => $pharmacies,
-            'users' => $users
+            'pharmacies' => $pharmacies
         ]);
     }
 
@@ -49,36 +47,51 @@ class DoctorsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'user' => ['required', 'integer'],
+            'name' => ['required', 'string'],
+            'email' => ['required', 'email', 'unique:users,email'],
+            'password' => ['required', 'min:6', 'string'],
+            'password_confirmation' => ['required'],
+            'national_id' => ['integer', 'unique:users,national_id'],
+            'mobile_number' => ['string'],
+            'gender' => ['required', 'string'],
+            'date_of_birth' => ['date'],
             'pharmacy' => ['required', 'integer']
         ]);
 
-        $user = User::find($request->input('user'));
-        $userRoleNames = array_values((array) $user->getRoleNames())[0];
+        if ($request->input('password') === $request->input('password_confirmation')) {
+            // if ($request->file('image')) {
+            //     $name = $request->file('image')->getClientOriginalName();
+            //     $path = $request->file('image')->store('public/images');
+            // }
 
-        if (
-            in_array('pharmacy', $userRoleNames) ||
-            in_array('doctor', $userRoleNames) ||
-            in_array('admin', $userRoleNames)
-        ) {
-            return back()->withErrors([
-                'user' => 'This owner already has a role.'
-            ])->onlyInput('user');
+            $user = User::create([
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'password' => $request->input('password'),
+                'national_id' => $request->input('national_id'),
+                'gender' => $request->input('gender'),
+                'date_of_birth' => $request->input('date_of_birth'),
+                'mobile_number' => $request->input('mobile_number'),
+                // 'profile_image' => $path
+            ]);
+            $user->assignRole('doctor');
+
+            Doctor::create([
+                'user_id' => $user->id,
+                'pharmacy_id' => $request->input('pharmacy')
+            ]);
+            
+            Session::flash('message', [
+                'type' => 'success',
+                'message' => 'Doctor created successfully!'
+            ]);
+    
+            return redirect()->route('admin.doctors.index');
         }
 
-        $user->assignRole('doctor');
-
-        Doctor::create([
-            'user_id' => $request->input('user'),
-            'pharmacy_id' => $request->input('pharmacy')
-        ]);
-
-        Session::flash('message', [
-            'type' => 'success',
-            'message' => 'Doctor created successfully!'
-        ]);
-
-        return redirect()->route('admin.doctors.index');
+        return back()->withErrors([
+            'password' => 'yyyyy'
+        ])->onlyInput('password');
     }
 
     /**
@@ -191,7 +204,7 @@ class DoctorsController extends Controller
                 $doctor->user->email,
                 $doctor->user->national_id,
                 $doctor->pharmacy->name,
-                $doctor->status,
+                $doctor->isBanned() ? 'banned' : 'active',
                 $doctor->created_at
             ];
         }, [...Doctor::all()]);

@@ -13,8 +13,7 @@ class Doctor extends Model implements BannableInterface
 
     protected $fillable = [
         'user_id',
-        'pharmacy_id',
-        'status'
+        'pharmacy_id'
     ];
 
     public function user()

@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('pharmacy_id');
-            $table->enum('status', ['active', 'banned'])->default('active');
 
             $table->foreign('user_id')
                 ->references('id')

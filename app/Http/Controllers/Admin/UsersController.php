@@ -41,13 +41,18 @@ class UsersController extends Controller
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'min:6', 'string'],
             'password_confirmation' => ['required'],
-            'national_id' => ['integer'],
+            'national_id' => ['integer', 'unique:users,national_id'],
             'mobile_number' => ['string'],
             'gender' => ['required', 'string'],
             'date_of_birth' => ['date']
         ]);
 
         if ($request->input('password') === $request->input('password_confirmation')) {
+            // if ($request->file('image')) {
+            //     $name = $request->file('image')->getClientOriginalName();
+            //     $path = $request->file('image')->store('public/images');
+            // }
+
             User::create([
                 'name' => $request->input('name'),
                 'email' => $request->input('email'),
@@ -55,7 +60,8 @@ class UsersController extends Controller
                 'national_id' => $request->input('national_id'),
                 'gender' => $request->input('gender'),
                 'date_of_birth' => $request->input('date_of_birth'),
-                'mobile_number' => $request->input('mobile_number')
+                'mobile_number' => $request->input('mobile_number'),
+                // 'profile_image' => $path
             ]);
 
             Session::flash('message', [

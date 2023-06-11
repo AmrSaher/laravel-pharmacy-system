@@ -55,7 +55,7 @@
                         <tr>
                             <td>{{ $user->id }}</td>
                             <td>
-                                <img src="{{ $user->profile_image }}" alt="user image"
+                                <img src="" alt="user image"
                                     style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;">
                             </td>
                             <td>{{ $user->name }}</td>

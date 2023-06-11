@@ -46,7 +46,6 @@
                         @role('admin')
                             <th>Pharmacy</th>
                         @endrole
-                        <th>Status</th>
                         <th>Created at</th>
                         <th>Actions</th>
                     </tr>
@@ -65,7 +64,6 @@
                             @role('admin')
                                 <td>{{ $doctor->pharmacy->name }}</td>
                             @endrole
-                            <td>{{ $doctor->status }}</td>
                             <td>{{ $doctor->created_at->diffForHumans() }}</td>
                             <td style="display: flex; flex-wrap: wrap; gap: 10px;">
                                 <a href="{{ route('admin.doctors.edit', ['doctor' => $doctor->id]) }}"

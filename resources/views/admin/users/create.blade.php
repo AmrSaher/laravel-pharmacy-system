@@ -38,7 +38,7 @@
                     <!-- jquery validation -->
                     <div class="card card-primary">
                         <!-- form start -->
-                        <form action="{{ route('admin.users.store') }}" method="POST">
+                        <form action="{{ route('admin.users.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <div class="card-body">
@@ -91,6 +91,18 @@
                                     <input type="date" name="date_of_birth" class="form-control" id="date_of_birth"
                                         placeholder="Enter user birth" />
                                 </div>
+                                {{-- <div class="form-group">
+                                    <label for="image">Profile Image</label>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="image" name="image">
+                                            <label class="custom-file-label" for="image">Choose image</label>
+                                        </div>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">Upload</span>
+                                        </div>
+                                    </div>
+                                </div> --}}
                                 <div class="form-group">
                                     <label for="mobile_number">Mobile number</label>
                                     <input type="number" name="mobile_number" class="form-control" id="mobile_number"
