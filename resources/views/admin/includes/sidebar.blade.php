@@ -133,7 +133,7 @@
                 @endcan
                 @can('order_access')
                     <li class="nav-item">
-                        <a href="" class="nav-link {{ Route::is('') ? 'active' : '' }}">
+                        <a href="{{ route('admin.orders.index') }}" class="nav-link {{ Route::is('admin.orders.index') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-shopping-bag"></i>
                             <p>
                                 Orders

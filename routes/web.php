@@ -1,17 +1,18 @@
 <?php
 
-use App\Http\Controllers\Admin\Auth\ForgetPasswordController;
-use App\Http\Controllers\Admin\MedicinesController;
-use App\Http\Controllers\Admin\PermissionsController;
-use App\Http\Controllers\Admin\RolesController;
-use App\Http\Controllers\Admin\UserAdressesController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\Auth\LoignController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\DoctorsController;
-use App\Http\Controllers\Admin\GovernoratesController;
-use App\Http\Controllers\Admin\PharmaciesController;
+use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Admin\OrdersController;
+use App\Http\Controllers\Admin\DoctorsController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\MedicinesController;
+use App\Http\Controllers\Admin\Auth\LoignController;
+use App\Http\Controllers\Admin\PharmaciesController;
+use App\Http\Controllers\Admin\PermissionsController;
+use App\Http\Controllers\Admin\GovernoratesController;
+use App\Http\Controllers\Admin\UserAdressesController;
+use App\Http\Controllers\Admin\Auth\ForgetPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,4 +71,8 @@ Route::prefix('admin')->middleware(['role:admin|doctor|pharmacy'])->name('admin.
     // User Addresses
     Route::resource('user_addresses', UserAdressesController::class)->middleware(['auth', 'role:admin']);
     Route::get('export/user_addresses', [UserAdressesController::class, 'export'])->middleware(['auth', 'role:admin'])->name('user_addresses.export');
+
+    // Orders
+    Route::resource('orders', OrdersController::class)->middleware(['auth', 'role:admin']);
+    Route::get('export/orders', [OrdersController::class, 'export'])->middleware(['auth', 'role:admin'])->name('orders.export');
 });

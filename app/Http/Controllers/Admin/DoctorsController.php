@@ -21,8 +21,8 @@ class DoctorsController extends Controller
     {
         $user = Auth::user();
         $doctors = $user->hasRole('admin') ?
-                    Doctor::all() :
-                    $user->pharmacy->doctors;
+            Doctor::all() :
+            $user->pharmacy->doctors;
 
         return view('admin.doctors.index', [
             'doctors' => $doctors
@@ -80,12 +80,12 @@ class DoctorsController extends Controller
                 'user_id' => $user->id,
                 'pharmacy_id' => $request->input('pharmacy')
             ]);
-            
+
             Session::flash('message', [
                 'type' => 'success',
                 'message' => 'Doctor created successfully!'
             ]);
-    
+
             return redirect()->route('admin.doctors.index');
         }
 
